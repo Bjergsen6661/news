@@ -1,0 +1,18 @@
+server:
+  port: 8006 # es搜索引擎约定8006端口
+
+
+############# 配置项目信息 #############
+spring:
+  application:
+    name: news-service-elasticsearch
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+
+
+############# 日志管理信息 #############
+logging:
+  config: classpath:logback-spring.xml
+

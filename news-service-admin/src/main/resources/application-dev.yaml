@@ -1,0 +1,7 @@
+# 管理员服务开发环境约定端口8005
+server:
+  port: 8005
+
+# 设置域名
+website:
+  domain-name: news.com

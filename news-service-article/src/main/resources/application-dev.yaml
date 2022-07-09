@@ -1,0 +1,14 @@
+#文章服务开发环境约定端口8001
+server:
+  port: 8001
+
+# dev 开发环境开启mybatis日志
+#mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 设置域名
+website:
+  domain-name: news.com
+
+

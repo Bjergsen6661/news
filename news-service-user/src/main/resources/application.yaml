@@ -1,0 +1,79 @@
+server:
+#  port: 8003 #由active切换不同环境对于端口
+
+
+############# 配置项目信息 #############
+spring:
+  profiles:
+    active: dev  #dev:开发环境  test:测试环境  prod:生产环境
+  application:
+    name: news-service-user
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8090 #sentinel 控制台地址
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource          # 数据源类型：HikariCP
+    driver-class-name: com.mysql.jdbc.Driver          # mysql驱动
+    url: jdbc:mysql://192.168.200.130:3307/com-news-dev?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+    username: root
+    password: root
+    hikari:
+      connection-timeout: 30000       # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 默认:30秒
+      minimum-idle: 5                 # 最小连接数
+      maximum-pool-size: 20           # 最大连接数
+      auto-commit: true               # 自动提交
+      idle-timeout: 600000            # 连接超时的最大时长（毫秒），超时则被释放（retired），默认:10分钟
+      pool-name: DateSourceHikariCP   # 连接池名字
+      max-lifetime: 1800000           # 连接的生命时长（毫秒），超时而且没被使用则被释放（retired），默认:30分钟 1800000ms
+      connection-test-query: SELECT 1
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss  #格式化日期
+    time-zone: GMT+8
+
+
+########## feign 日志优化相关配置信息 ###########
+feign:
+  client:
+    config:
+      news-service-elasticsearch:
+        loggerLevel: BASIC
+  httpclient:
+    enabled: true #开启feign对HttpClient的支持
+    max-connections: 200 #最大的连接数
+    max-connections-per-route: 50 #单个路径的最大连接数
+
+########## ribbon 相关配置信息 ###########
+ribbon:
+  eager-load:
+    enabled: true # 开启饥饿加载
+    clients: news-service-elasticsearch
+
+
+############# 配置mybatis信息 #############
+mybatis:
+  type-aliases-package: com.news.model.user.pojo   # 所有POJO类所在包路径，放在model统一管理
+  mapper-locations: classpath:mapper/*.xml         # mapper映射文件
+
+
+############# 配置mymapper信息 #############
+mapper:
+  mappers: com.news.api.my.mapper.MyMapper   #放在api统一管理
+  not-empty: false    # 在进行数据库操作的的时候，判断表达式 username != null, 是否追加
+  identity: MYSQL
+
+
+############# 分页插件配置 #############
+pagehelper:
+  helperDialect: mysql
+  supportMethodsArguments: true
+
+
+############# 日志管理信息 #############
+logging:
+  config: classpath:logback-spring.xml
+  level:
+    com.news.api.controller.elasticsearch.EsFansControllerApi: debug

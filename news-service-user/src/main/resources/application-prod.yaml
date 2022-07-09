@@ -1,0 +1,8 @@
+#用户服务生产环境约定端口8103
+server:
+  port: 8103
+
+
+# 设置域名
+website:
+  domain-name: news.com

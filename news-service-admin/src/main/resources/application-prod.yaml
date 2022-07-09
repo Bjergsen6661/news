@@ -1,0 +1,7 @@
+# 管理员服务生产环境约定端口8105
+server:
+  port: 8105
+
+# 设置域名
+website:
+  domain-name: news.com

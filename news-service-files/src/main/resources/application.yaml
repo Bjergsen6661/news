@@ -1,0 +1,29 @@
+server:
+#  port: 8004 #由active切换不同环境对于端口
+
+
+############# 配置项目信息 #############
+spring:
+  profiles:
+    active: dev  #dev:开发环境  test:测试环境  prod:生产环境
+  application:
+    name: news-service-files
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss  #格式化日期
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 512000    # 请求的文件大小限制为500kb
+      max-request-size: 512000
+  data:
+    mongodb:
+      uri: mongodb://root:root@192.168.200.130:27017
+      database: com-news
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.200.130:8848
+
+############# 日志管理信息 #############
+logging:
+  config: classpath:logback-spring.xml

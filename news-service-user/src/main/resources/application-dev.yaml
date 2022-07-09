@@ -1,0 +1,14 @@
+#用户服务开发环境约定端口8003
+server:
+  port: 8003
+
+# dev 开发环境开启mybatis日志
+#mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+# 设置域名
+website:
+  domain-name: news.com
+
+
